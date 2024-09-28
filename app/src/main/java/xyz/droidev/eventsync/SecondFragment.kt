@@ -1,6 +1,7 @@
 package xyz.droidev.eventsync
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,11 +51,14 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.rvParty.adapter = adapter
+        binding.rvParty.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
         adapter.setOnItemClickListener {
-
+            selectedParty = it
         }
         lifecycleScope.launch {
-            adapter.setData(apiService.getPoliticalParty())
+            val data = apiService.getPoliticalParty()
+            adapter.setData(data)
         }
 
         binding.generateButton.setOnClickListener {

@@ -1,6 +1,7 @@
 package xyz.droidev.eventsync
 
 import android.app.Activity.RESULT_OK
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
@@ -41,6 +42,7 @@ class FirstFragment : Fragment() {
 //        TextToSpeech(requireContext()){ }
 //    }
     private val defaultDetector = FaceMeshDetection.getClient()
+    private val progressDialog by lazy { ProgressDialog(requireContext()) }
 
     private val imageUri by lazy{ FileProvider.getImageUri(requireContext()) }
     @Inject
@@ -96,12 +98,26 @@ class FirstFragment : Fragment() {
     }
 
     private fun registerListeners() {
-        val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { }
+        val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+            if(it){
+                binding.imagePreviewLayout.visibility = View.VISIBLE
+                binding.clickImageButton.visibility = View.GONE
+                binding.imagePreview.setImageURI(imageUri)
+            }
+        }
+
+        binding.closeImageButton.setOnClickListener {
+            binding.imagePreviewLayout.visibility = View.GONE
+            binding.clickImageButton.visibility = View.VISIBLE
+            binding.imagePreview.setImageURI(null)
+        }
+
         binding.clickImageButton.setOnClickListener {
             cameraLauncher.launch(imageUri)
         }
 
         binding.generateButton.setOnClickListener {
+            progressDialog.show()
             val aadhar = binding.aadharInput.text.toString()
             val name = binding.nameInput.text.toString()
             val mob = binding.phoneInput.text.toString()
@@ -144,6 +160,8 @@ class FirstFragment : Fragment() {
                     ).show()
                 }catch (e:Exception){
                     Toast.makeText(requireContext(), "some error occurred", Toast.LENGTH_SHORT).show()
+                }finally {
+                    progressDialog.dismiss()
                 }
             }
         }

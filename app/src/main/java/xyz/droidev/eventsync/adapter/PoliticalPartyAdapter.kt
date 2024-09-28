@@ -34,7 +34,8 @@ class PoliticalPartyAdapter(
             Glide.with(this.root.context)
                 .load("https://api.dicebear.com/9.x/personas/png?seed=${curr.leader}")
                 .into(partyIcon)
-            isSelected.isSelected = position == selectedParty
+            isSelected.isChecked = (selectedParty == position)
+            isSelected.isSelected = (selectedParty == position)
 
             root.setOnClickListener {
                 val t = selectedParty
