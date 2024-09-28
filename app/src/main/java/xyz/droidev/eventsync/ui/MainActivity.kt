@@ -1,16 +1,14 @@
-package xyz.droidev.eventsync
+package xyz.droidev.eventsync.ui
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.droidev.eventsync.R
 import xyz.droidev.eventsync.databinding.ActivityMainBinding
 
 @AndroidEntryPoint

@@ -1,7 +1,6 @@
-package xyz.droidev.eventsync
+package xyz.droidev.eventsync.ui.vote
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +12,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.Orientation
-import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,7 +20,6 @@ import xyz.droidev.eventsync.data.api.ApiService
 import xyz.droidev.eventsync.data.api.PoliticalParty
 import xyz.droidev.eventsync.data.api.SubmitVoteBody
 import xyz.droidev.eventsync.databinding.FragmentSecondBinding
-import xyz.droidev.eventsync.databinding.ItemPoliticalPartyBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint

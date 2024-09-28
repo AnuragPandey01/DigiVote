@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="xyz.droidev.eventsync.FirstFragment"
+        android:name="xyz.droidev.eventsync.ui.home.FirstFragment"
         android:label="Home"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="xyz.droidev.eventsync.SecondFragment"
+        android:name="xyz.droidev.eventsync.ui.vote.SecondFragment"
         android:label="Vote"
         tools:layout="@layout/fragment_second">
 
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/QRFragment"
-        android:name="xyz.droidev.eventsync.QRFragment"
+        android:name="xyz.droidev.eventsync.ui.qr.QRFragment"
         android:label="fragment_q_r"
         tools:layout="@layout/fragment_q_r" >
         <argument android:name="user_id" />

@@ -1,12 +1,7 @@
-package xyz.droidev.eventsync
+package xyz.droidev.eventsync.ui.home
 
-import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
-import android.speech.RecognizerIntent
-import android.speech.tts.TextToSpeech
-import android.speech.tts.Voice
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,14 +14,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.facemesh.FaceMeshDetection
-import com.google.mlkit.vision.facemesh.FaceMeshDetectorOptions
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import xyz.droidev.eventsync.data.api.ApiService
-import xyz.droidev.eventsync.data.api.FaceMeshPoint
-import xyz.droidev.eventsync.data.api.UserData
+import xyz.droidev.eventsync.data.model.request.FaceMeshPoint
+import xyz.droidev.eventsync.data.model.request.UserData
 import xyz.droidev.eventsync.databinding.FragmentFirstBinding
 import xyz.droidev.eventsync.util.FileProvider
 import javax.inject.Inject
@@ -38,9 +32,6 @@ class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MyViewModel by viewModels()
-//    private val textToSpeech : TextToSpeech by lazy {
-//        TextToSpeech(requireContext()){ }
-//    }
     private val defaultDetector = FaceMeshDetection.getClient()
     private val progressDialog by lazy { ProgressDialog(requireContext()) }
 
@@ -53,8 +44,6 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        textToSpeech.setVoice(Voice("vipul",Locale("hi","IN"),300,300,true,null))
-//        textToSpeech.setLanguage(Locale("hi", "IN"))
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -62,38 +51,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-//        val launcher = registerForActivityResult(
-//            ActivityResultContracts.StartActivityForResult()
-//        ){ result ->
-//            if(result.resultCode == RESULT_OK){
-//                Toast.makeText(requireContext(),"result ok",Toast.LENGTH_SHORT).show();
-//                result.data?.let{
-//                    val resTxt = it.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS) as ArrayList<String>
-//                    binding.text.text= resTxt[0]
-//                }
-//            }
-//        }
-//        binding.audioButton.setOnClickListener {
-//            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-//            intent.putExtra(
-//                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-//                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-//            )
-//            intent.putExtra(
-//                RecognizerIntent.EXTRA_LANGUAGE,
-//                Locale.getDefault()
-//            )
-//            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text")
-//            try {
-//                launcher.launch(intent)
-//            } catch (e: Exception) {
-//                Toast.makeText(requireContext(),"error",Toast.LENGTH_SHORT).show();
-//            }
-//            //textToSpeech.speak("Dhruv sane",TextToSpeech.QUEUE_ADD,null,"u")
-//        }
-
         registerListeners()
     }
 

@@ -1,4 +1,4 @@
-package xyz.droidev.eventsync
+package xyz.droidev.eventsync.ui.qr
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

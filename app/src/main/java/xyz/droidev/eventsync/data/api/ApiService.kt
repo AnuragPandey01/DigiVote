@@ -3,6 +3,10 @@ package xyz.droidev.eventsync.data.api
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import xyz.droidev.eventsync.data.model.request.GenerationResponse
+import xyz.droidev.eventsync.data.model.request.SubmitVoteBody
+import xyz.droidev.eventsync.data.model.request.UserData
+import xyz.droidev.eventsync.data.model.response.PoliticalParty
 
 interface ApiService {
     @POST("/save-user-data")
@@ -20,33 +24,3 @@ interface ApiService {
         submitVoteBody: SubmitVoteBody
     )
 }
-
-data class PoliticalParty(
-    val id: Int,
-    val party_name: String,
-    val party_code: String,
-    val leader: String
-)
-
-data class UserData(
-    val aadhaar: String,
-    val full_name: String,
-    val phone: String,
-    val bounds: List<Float>,
-    val face_points: List<FaceMeshPoint>,
-    val triangle_indices: List<List<Int>>? = null
-)
-data class FaceMeshPoint(
-    val index: Int,
-    val position: List<Float>
-)
-
-data class SubmitVoteBody(
-    val user_id: Int,
-    val party_code: String,
-    val party_name: String
-)
-
-data class GenerationResponse(
-    val id: Int
-)
